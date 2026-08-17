@@ -7,23 +7,6 @@ document.body.style.display = "flex";
 document.body.style.justifyContent = "center";
 document.body.style.alignItems = "center";
 
-// Task dropdown creation
-let taskstatedropdown = document.createElement("select");
-
-let option1 = document.createElement("option");
-option1.value = "pending";
-option1.text = "Pending";
-
-taskstatedropdown.appendChild(option1);
-
-let option2 = document.createElement("option");
-option2.value = "completed";
-option2.text = "Completed";
-
-taskstatedropdown.appendChild(option2);
-
-// Buttons
-
 let completed = document.createElement("button");
 completed.innerText = "Completed";
 
@@ -56,8 +39,6 @@ alltask.style.borderRadius = "6px";
 alltask.style.backgroundColor = "#dc2626";
 alltask.style.color = "white";
 alltask.style.cursor = "pointer";
-
-// Adding buttons in main div
 
 let taskbtndiv = document.createElement("div");
 
@@ -184,8 +165,6 @@ container.append(resetButton);
 
 let count = 0;
 
-addButton.addEventListener("click", () => {});
-
 function updateCounter() {
   counter.innerText = "Tasks: " + count;
 }
@@ -239,8 +218,6 @@ function createTask(taskText) {
 
   deleteButton.className = "delete-button";
 
-  // NEW STATUS DROPDOWN
-
   let statusSelect = document.createElement("select");
 
   let completedOption = document.createElement("option");
@@ -271,13 +248,9 @@ function createTask(taskText) {
 
   taskContainer.append(task);
 
-  // STATUS CHANGE
-
   statusSelect.addEventListener("change", () => {
     task.setAttribute("data-status", statusSelect.value);
   });
-
-  // EDIT BUTTON
 
   editButton.addEventListener("click", () => {
     let updateInput = document.createElement("input");
@@ -310,7 +283,6 @@ function createTask(taskText) {
     updateInput.style.padding = "8px";
     updateInput.style.borderColor = "blue";
     updateInput.style.boxSizing = "border-box";
-
     updateInput.style.flex = "1";
 
     updateButton.addEventListener("click", () => {
@@ -327,8 +299,6 @@ function createTask(taskText) {
     });
   });
 
-  // DELETE BUTTON
-
   deleteButton.addEventListener("click", () => {
     task.remove();
 
@@ -341,8 +311,6 @@ function createTask(taskText) {
 
   updateCounter();
 }
-
-// ADD TASK
 
 addButton.addEventListener("click", () => {
   let value = input.value.trim();
@@ -358,15 +326,11 @@ addButton.addEventListener("click", () => {
   input.focus();
 });
 
-// ENTER KEY
-
 input.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     addButton.click();
   }
 });
-
-// RESET
 
 resetButton.addEventListener("click", () => {
   taskContainer.innerHTML = "";
@@ -375,8 +339,6 @@ resetButton.addEventListener("click", () => {
 
   updateCounter();
 });
-
-// COMPLETED BUTTON
 
 completed.addEventListener("click", () => {
   let tasks = taskContainer.children;
@@ -390,8 +352,6 @@ completed.addEventListener("click", () => {
   }
 });
 
-// PENDING BUTTON
-
 pending.addEventListener("click", () => {
   let tasks = taskContainer.children;
 
@@ -403,8 +363,6 @@ pending.addEventListener("click", () => {
     }
   }
 });
-
-// ALL TASKS BUTTON
 
 alltask.addEventListener("click", () => {
   let tasks = taskContainer.children;
