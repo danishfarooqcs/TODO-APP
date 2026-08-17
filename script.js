@@ -60,7 +60,7 @@ document.body.append(container);
 
 let title = document.createElement("h1");
 
-title.innerText = "My Todo List";
+title.innerText = "My Todo List(Danish)";
 
 title.style.margin = "0";
 title.style.marginBottom = "8px";
@@ -95,7 +95,7 @@ container.append(inputArea);
 let input = document.createElement("input");
 
 input.type = "text";
-input.placeholder = "Enter your task...";
+input.placeholder = "Enter your task.?";
 
 input.style.flex = "1";
 input.style.padding = "13px 15px";

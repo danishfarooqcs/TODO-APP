@@ -12,9 +12,7 @@ alltask.addEventListener("click", () => {
 
 container.append(taskbtndiv);
 
-// ===============================
-// 1. STATUS DROPDOWN
-// ===============================
+// dropdewon
 
 let statusSelect = document.createElement("select");
 
@@ -38,35 +36,19 @@ statusSelect.style.fontWeight = "bold";
 statusSelect.style.cursor = "pointer";
 statusSelect.style.outline = "none";
 
-// ===============================
-// 2. GIVE TASK INITIAL STATUS
-// ===============================
-
 // Every new task starts as Pending
 
 task.setAttribute("data-status", "pending");
 
-// ===============================
-// 3. ADD DROPDOWN TO TASK
-// ===============================
-
 task.append(taskTextElement, editButton, deleteButton, statusSelect);
 
-// ===============================
-// 4. DROPDOWN CHANGE EVENT
-// ===============================
-
-// Runs whenever user changes
-// Pending → Completed
 // Completed → Pending
 
 statusSelect.addEventListener("change", () => {
   task.setAttribute("data-status", statusSelect.value);
 });
 
-// ===============================
-// 5. COMPLETED BUTTON
-// ===============================
+// comolepl btn
 
 // Show only completed tasks
 
@@ -82,11 +64,8 @@ completed.addEventListener("click", () => {
   }
 });
 
-// ===============================
-// 6. PENDING BUTTON
-// ===============================
-
-// Show only pending tasks
+///pending btn
+// only pending tasks
 
 pending.addEventListener("click", () => {
   let tasks = taskContainer.children;
@@ -100,9 +79,7 @@ pending.addEventListener("click", () => {
   }
 });
 
-// ===============================
-// 7. ALL TASKS BUTTON
-// ===============================
+//alltask btn
 
 // Show every task
 
