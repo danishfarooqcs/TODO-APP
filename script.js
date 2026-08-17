@@ -7,6 +7,62 @@ document.body.style.display = "flex";
 document.body.style.justifyContent = "center";
 document.body.style.alignItems = "center";
 
+// Task dropdown creation
+let taskstatedropdown = document.createElement("select");
+
+let option1 = document.createElement("option");
+option1.value = "pending";
+option1.text = "Pending";
+
+taskstatedropdown.appendChild(option1);
+
+let option2 = document.createElement("option");
+option2.value = "completed";
+option2.text = "Completed";
+
+taskstatedropdown.appendChild(option2);
+
+// Buttons
+
+let completed = document.createElement("button");
+completed.innerText = "Completed";
+
+completed.style.padding = "7px 12px";
+completed.style.border = "none";
+completed.style.margin = "5px";
+completed.style.borderRadius = "6px";
+completed.style.backgroundColor = "blue";
+completed.style.color = "white";
+completed.style.cursor = "pointer";
+
+let pending = document.createElement("button");
+pending.innerText = "Pending";
+
+pending.style.padding = "7px 12px";
+pending.style.margin = "5px";
+pending.style.border = "none";
+pending.style.borderRadius = "6px";
+pending.style.backgroundColor = "green";
+pending.style.color = "white";
+pending.style.cursor = "pointer";
+
+let alltask = document.createElement("button");
+alltask.innerText = "All task";
+
+alltask.style.padding = "7px 12px";
+alltask.style.border = "none";
+alltask.style.margin = "5px";
+alltask.style.borderRadius = "6px";
+alltask.style.backgroundColor = "#dc2626";
+alltask.style.color = "white";
+alltask.style.cursor = "pointer";
+
+// Adding buttons in main div
+
+let taskbtndiv = document.createElement("div");
+
+taskbtndiv.append(completed, pending, alltask);
+
 let container = document.createElement("div");
 
 container.style.width = "520px";
@@ -107,6 +163,7 @@ taskContainer.style.gap = "10px";
 taskContainer.className = "task-container";
 
 container.append(taskContainer);
+container.append(taskbtndiv);
 
 let resetButton = document.createElement("button");
 
@@ -145,6 +202,8 @@ function createTask(taskText) {
   task.style.backgroundColor = "#1e3a8a";
   task.style.borderRadius = "8px";
 
+  task.setAttribute("data-status", "pending");
+
   let taskTextElement = document.createElement("span");
 
   taskTextElement.innerText = taskText;
@@ -180,9 +239,45 @@ function createTask(taskText) {
 
   deleteButton.className = "delete-button";
 
-  task.append(taskTextElement, editButton, deleteButton);
+  // NEW STATUS DROPDOWN
+
+  let statusSelect = document.createElement("select");
+
+  let completedOption = document.createElement("option");
+
+  completedOption.value = "completed";
+  completedOption.textContent = "Completed";
+
+  let pendingOption = document.createElement("option");
+
+  pendingOption.value = "pending";
+  pendingOption.textContent = "Pending";
+
+  statusSelect.append(completedOption, pendingOption);
+
+  statusSelect.value = "pending";
+
+  statusSelect.style.backgroundColor = "#16a34a";
+  statusSelect.style.color = "white";
+  statusSelect.style.border = "none";
+  statusSelect.style.borderRadius = "6px";
+  statusSelect.style.padding = "9px 12px";
+  statusSelect.style.fontSize = "16px";
+  statusSelect.style.fontWeight = "bold";
+  statusSelect.style.cursor = "pointer";
+  statusSelect.style.outline = "none";
+
+  task.append(taskTextElement, editButton, deleteButton, statusSelect);
 
   taskContainer.append(task);
+
+  // STATUS CHANGE
+
+  statusSelect.addEventListener("change", () => {
+    task.setAttribute("data-status", statusSelect.value);
+  });
+
+  // EDIT BUTTON
 
   editButton.addEventListener("click", () => {
     let updateInput = document.createElement("input");
@@ -232,6 +327,8 @@ function createTask(taskText) {
     });
   });
 
+  // DELETE BUTTON
+
   deleteButton.addEventListener("click", () => {
     task.remove();
 
@@ -244,6 +341,8 @@ function createTask(taskText) {
 
   updateCounter();
 }
+
+// ADD TASK
 
 addButton.addEventListener("click", () => {
   let value = input.value.trim();
@@ -259,11 +358,15 @@ addButton.addEventListener("click", () => {
   input.focus();
 });
 
+// ENTER KEY
+
 input.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     addButton.click();
   }
 });
+
+// RESET
 
 resetButton.addEventListener("click", () => {
   taskContainer.innerHTML = "";
@@ -271,4 +374,42 @@ resetButton.addEventListener("click", () => {
   count = 0;
 
   updateCounter();
+});
+
+// COMPLETED BUTTON
+
+completed.addEventListener("click", () => {
+  let tasks = taskContainer.children;
+
+  for (let task of tasks) {
+    if (task.getAttribute("data-status") === "completed") {
+      task.style.display = "flex";
+    } else {
+      task.style.display = "none";
+    }
+  }
+});
+
+// PENDING BUTTON
+
+pending.addEventListener("click", () => {
+  let tasks = taskContainer.children;
+
+  for (let task of tasks) {
+    if (task.getAttribute("data-status") === "pending") {
+      task.style.display = "flex";
+    } else {
+      task.style.display = "none";
+    }
+  }
+});
+
+// ALL TASKS BUTTON
+
+alltask.addEventListener("click", () => {
+  let tasks = taskContainer.children;
+
+  for (let task of tasks) {
+    task.style.display = "flex";
+  }
 });
